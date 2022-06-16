@@ -7,17 +7,22 @@ import Meditacao from '../components/Meditacao';
 export default function Inicial({ navigation }) {
   const meditacoes = ['meditacao1', 'meditacao2', 'meditacao3']
 
-  
+
   return (
     <View style={styles.container} >
       <Text>Meditação App!</Text>
       <StatusBar style="auto" />
 
       {
-        meditacoes.map( meditacao => <Meditacao nome={meditacao} key={meditacao} navigation={navigation} /> )
+        meditacoes.map(meditacao => 
+          <Meditacao 
+            nome={meditacao} 
+            key={meditacao} 
+            navigation={navigation} 
+          />)
       }
 
-      
+
     </View>
   );
 }

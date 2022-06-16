@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Temporizador from '../pages/temporizador';
-import Inicial from '../pages/inicial';
+import Temporizador from '../pages/Temporizador';
+import Inicial from '../pages/Inicial';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +16,7 @@ function Screens() {
       <Stack.Screen 
         component={ Temporizador } 
         name='temporizador'
+        options={{ headerShown: true, title: "meditacao" }}
       />
     </Stack.Navigator>
   );

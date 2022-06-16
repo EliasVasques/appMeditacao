@@ -2,11 +2,10 @@ import { StyleSheet, Text, View, Link } from 'react-native';
 
 
 export default function Meditacao(props) {
-    const vaiParaMeditacao = () => props.navigation.navigate('temporizador');
-
+    
     return <View style={styles.songContainer}>
-        <Text onPress={ vaiParaMeditacao }>
-        {props.nome}
+        <Text onPress={() => { props.navigation.navigate('temporizador', { nome: props.nome }) }}>
+            {props.nome}
         </Text>
     </View>;
 }
