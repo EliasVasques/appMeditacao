@@ -1,15 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ImageBackground, Image } from 'react-native';
 import { useState, useEffect } from 'react';
 
-
-
-export default function Temporizador( {route} ) {
+export default function Temporizador({ route }) {
 
   const { nome } = route.params; // pegar parametros
 
   const [segundos, setSegundos] = useState(0);
   const [minutos, setMinutos] = useState(0);
+  const [imagem, setImagem] = useState(require('../images/background1.jpg'));
 
   const menosUmSegundo = () => {
     setSegundos(segundo => segundo - 1)
@@ -29,22 +28,61 @@ export default function Temporizador( {route} ) {
 
   if (segundos != 0) setTimeout(menosUmSegundo, 1000)
 
+  const imagemAnteriorBotao = () => {
+    if(imagem === require('../images/background1.jpg')) setImagem(require('../images/background3.jpg'));
+
+    else if(imagem === require('../images/background2.jpg')) setImagem(require('../images/background1.jpg'));
+    
+    else if(imagem === require('../images/background3.jpg')) setImagem(require('../images/background2.jpg'));
+  }
+
+  const proximaImagemBotao = () => {
+    if(imagem === require('../images/background1.jpg')) setImagem(require('../images/background2.jpg'));
+
+    else if(imagem === require('../images/background2.jpg')) setImagem(require('../images/background3.jpg'));
+    
+    else if(imagem === require('../images/background3.jpg')) setImagem(require('../images/background1.jpg'));
+  }
+
   return (
     <View style={styles.container}>
 
+      <ImageBackground
+        source={imagem}
+        resizeMode="cover"
+        style={styles.image}>
 
-      <Text>{nome}</Text>
+        <Button
+          title={<Image
+            style={{ width: 50, height: 50 }}
+            source={require('../images/anterior.png')}
+          />}
+          onPress={imagemAnteriorBotao}
+          >
+        </Button>
+        <Button
+          title={<Image
+            style={{ width: 50, height: 50 }}
+            source={require('../images/proximo.png')}
+          />}
+          onPress={proximaImagemBotao}
+          >
+        </Button>
 
-      <p>Quanto minutos?</p>
-      <input type="number" onChange={(e) => setMinutos(e.target.value)} />
-      <Button
-        onPress={iniciar}
-        title="Iniciar"
-      />
+        <Text>{nome}</Text>
 
-      <Text>Timer: {getMinuto()}:{getSegundo()}</Text>
+        <p>Quanto minutos?</p>
+        <input type="number" onChange={(e) => setMinutos(e.target.value)} />
+        <Button
+          onPress={iniciar}
+          title="Iniciar"
+        />
 
-      <StatusBar style="auto" />
+        <Text>Timer: {getMinuto()}:{getSegundo()}</Text>
+
+        <StatusBar style="auto" />
+
+      </ImageBackground>
     </View>
   );
 }
@@ -56,5 +94,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center"
   },
 });

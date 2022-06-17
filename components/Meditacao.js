@@ -2,9 +2,11 @@ import { StyleSheet, Text, View, Link } from 'react-native';
 
 
 export default function Meditacao(props) {
-    
+    const irParaTimer = () =>  props.navigation.navigate('temporizador', { nome: props.nome })
+
     return <View style={styles.songContainer}>
-        <Text onPress={() => { props.navigation.navigate('temporizador', { nome: props.nome }) }}>
+        <Text 
+            onPress={irParaTimer}>
             {props.nome}
         </Text>
     </View>;
